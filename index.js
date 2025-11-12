@@ -3,11 +3,14 @@ const mongoose = require('mongoose');
 const path = require('path');
 const app = express();
 
-const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const PORT = 3000; // 원하는 포트 직접 지정
+const MONGODB_URI = 'mongodb+srv://qdata:p%40ngdang11@clusterqzdb.4htxnn3.mongodb.net/qdb'; // URI 직접 입력
 
 // MongoDB 연결
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => console.log('✅ MongoDB Connected'))
   .catch(err => console.error('❌ MongoDB Connection Error:', err));
 
@@ -39,4 +42,4 @@ app.get('/', async (req, res) => {
 });
 
 // 서버 실행
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server is run
