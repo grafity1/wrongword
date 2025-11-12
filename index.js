@@ -42,4 +42,4 @@ app.get('/', async (req, res) => {
 });
 
 // 서버 실행
-app.listen(PORT, () => console.log(`Server is run
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
