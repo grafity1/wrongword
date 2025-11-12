@@ -1,15 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>WRONG WORD</title>
+  <meta charset="UTF-8">
+  <title>Wrong Word List</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
 </head>
 <body>
-    <h1>WRONG WORD</h1>
-    <nav>
-        <ul>
-            <li>1243</li>
-        </ul>
-    </nav>
-    <p></p>
+  <h2>틀린 단어 목록</h2>
+  <table id="wordTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>틀린 단어</th>
+        <th>올바른 단어</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    async function loadWords() {
+      try {
+        const res = await fetch('/api/words');
+        const data = await res.json();
+        const tbody = document.querySelector('#wordTable tbody');
+        data.forEach(item => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${item.wordid}</td>
+            <td>${item.wrongname}</td>
+            <td>${item.rightname}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        console.error('데이터 불러오기 실패:', err);
+      }
+    }
+
+    loadWords();
+  </script>
 </body>
 </html>
