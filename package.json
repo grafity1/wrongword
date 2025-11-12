@@ -14,8 +14,8 @@
     "bootstrap": "^5.3.8",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "memorystore": "^1.6.7"
+    "memorystore": "^1.6.7",
+    "mongoose": "^8.19.3"
   },
-  "devDependencies": {},
   "keywords": []
 }
