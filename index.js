@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 // MongoDB 연결
@@ -18,7 +18,7 @@ const WrongWord = mongoose.model('wrongword', new mongoose.Schema({
   rightname: String
 }), 'wrongword');
 
-// API 라우트 - JSON 반환
+// API 엔드포인트
 app.get('/api/wrongwords', async (req, res) => {
   try {
     const data = await WrongWord.find();
@@ -30,7 +30,9 @@ app.get('/api/wrongwords', async (req, res) => {
 
 // React 빌드 파일 서빙
 app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req, res) => {
+
+// SPA fallback (모든 React 라우트 처리)
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
