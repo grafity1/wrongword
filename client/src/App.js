@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <h1>Wrong Word Manager</h1>
+      <h1>많이 틀리는 맞춤법</h1>
 
       <div className="tab-menu">
         <button
