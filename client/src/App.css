@@ -28,7 +28,7 @@
   color: #61dafb;
 }
 
-.App-container {
+.app-container {
   max-width: 1200px;      /* 최대 너비 지정 */
   margin: 0 auto;          /* 화면 가운데 정렬 */
   padding: 0 20px;         /* 좌우 20px 여백 */
