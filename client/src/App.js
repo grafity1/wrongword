@@ -7,9 +7,9 @@ import './App.css';
 function App() {
   const [data, setData] = useState([]);
   const [activeTab, setActiveTab] = useState('table');
-  const API_URL = 'https://wrongword.onrender.com'; // Render 배포 URL
+  const API_URL = 'https://wrongword.onrender.com';
 
-  // 서버에서 단어 목록 불러오기
+  // 단어 목록 불러오기
   const fetchWords = async () => {
     try {
       const res = await axios.get(`${API_URL}/api/wrongwords`);
@@ -23,21 +23,12 @@ function App() {
     fetchWords();
   }, []);
 
-  // 새로운 단어 추가
-const handleAddWord = async (newWord) => {
-  try {
-    const res = await axios.post(`${API_URL}/api/wrongwords`, newWord);
-    // 기존 data에서 wordid 중복 제거 후 추가
-    setData(prev => [
-      ...prev.filter(d => d.wordid !== res.data.wordid),
-      res.data
-    ]);
+  // AddWordForm에서 새 단어를 넘겨주면 DB 추가는 이미 완료된 상태이므로
+  // 여기서는 목록에 추가만 수행
+  const handleAddWord = (newWord) => {
+    setData(prev => [...prev, newWord]);
     setActiveTab('table');
-  } catch (err) {
-    console.error('Add word error:', err);
-    alert('단어 추가 중 오류가 발생했습니다.');
-  }
-};
+  };
 
   return (
     <div className="app-container">

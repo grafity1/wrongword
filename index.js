@@ -16,7 +16,7 @@ mongoose.connect(MONGODB_URI)
 
 // 모델 정의
 const WrongWord = mongoose.model('wrongword', new mongoose.Schema({
-  wordid: String,
+  wordid: Number,      // String → Number
   wrongname: String,
   rightname: String
 }), 'wrongword');
@@ -26,7 +26,7 @@ const WrongWord = mongoose.model('wrongword', new mongoose.Schema({
 // 단어 목록 조회
 app.get('/api/wrongwords', async (req, res) => {
   try {
-    const data = await WrongWord.find();
+    const data = await WrongWord.find().sort({ wordid: 1 }); // 오름차순 정렬
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -40,7 +40,7 @@ app.post('/api/wrongwords', async (req, res) => {
 
     // DB에서 현재 최대 wordid 구하기
     const maxWord = await WrongWord.findOne().sort({ wordid: -1 }).exec();
-    const newWordId = maxWord ? String(Number(maxWord.wordid) + 1) : '1'; // 첫번째 단어면 1
+    const newWordId = maxWord ? maxWord.wordid + 1 : 1; // 숫자 덧셈
 
     const newWord = await WrongWord.create({
       wordid: newWordId,
@@ -58,7 +58,6 @@ app.post('/api/wrongwords', async (req, res) => {
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // SPA fallback: 모든 React 경로 처리
-// 정규식 대신 문자열 '*' 사용 가능
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
