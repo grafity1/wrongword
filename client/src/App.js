@@ -24,16 +24,20 @@ function App() {
   }, []);
 
   // 새로운 단어 추가
-  const handleAddWord = async (newWord) => {
-    try {
-      const res = await axios.post(`${API_URL}/api/wrongwords`, newWord);
-      setData([...data, res.data]); // 추가 후 state 업데이트
-      setActiveTab('table'); // 추가 후 테이블 탭으로 이동
-    } catch (err) {
-      console.error('Add word error:', err);
-      alert('단어 추가 중 오류가 발생했습니다.');
-    }
-  };
+const handleAddWord = async (newWord) => {
+  try {
+    const res = await axios.post(`${API_URL}/api/wrongwords`, newWord);
+    // 기존 data에서 wordid 중복 제거 후 추가
+    setData(prev => [
+      ...prev.filter(d => d.wordid !== res.data.wordid),
+      res.data
+    ]);
+    setActiveTab('table');
+  } catch (err) {
+    console.error('Add word error:', err);
+    alert('단어 추가 중 오류가 발생했습니다.');
+  }
+};
 
   return (
     <div className="app-container">

@@ -58,8 +58,8 @@ function WrongWordTable({ data }) {
           </tr>
         </thead>
         <tbody>
-          {currentData.map((d, i) => (
-            <tr key={i}>
+          {currentData.map(d => (
+            <tr key={d.wordid}>
               <td>{d.wordid}</td>
               <td>{d.wrongname}</td>
               <td>{d.rightname}</td>
