@@ -32,7 +32,7 @@ app.get('/api/wrongwords', async (req, res) => {
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // SPA fallback (모든 React 라우트 처리)
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
