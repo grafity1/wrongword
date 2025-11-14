@@ -31,9 +31,9 @@ app.get('/api/wrongwords', async (req, res) => {
 // React 빌드 파일 서빙
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// SPA fallback (모든 React 라우트 처리)
-app.get('/*', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+// Express 5에서 동작하는 fallback 라우트
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 // 서버 실행
