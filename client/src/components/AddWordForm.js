@@ -11,7 +11,7 @@ function AddWordForm({ onAdd }) {
     if (!wrongword || !rightword) return;
 
     try {
-      const res = await axios.post('http://wrongword.onrender.com/add-word', {
+      const res = await axios.post('https://wrongword.onrender.com/add-word', {
         wrongword,
         rightword
       });
