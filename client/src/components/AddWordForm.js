@@ -35,7 +35,7 @@ function AddWordForm({ onAdd }) {
           <input
             type="text"
             value={wrongname}
-            onChange={(e) => setWrongword(e.target.value)}
+            onChange={(e) => setWrongname(e.target.value)}
             required
             style={{ width: '100%', padding: '8px', margin: '5px 0', borderRadius: '4px', border: '1px solid #ccc' }}
           />
@@ -45,7 +45,7 @@ function AddWordForm({ onAdd }) {
           <input
             type="text"
             value={rightname}
-            onChange={(e) => setRightword(e.target.value)}
+            onChange={(e) => setRightname(e.target.value)}
             required
             style={{ width: '100%', padding: '8px', margin: '5px 0', borderRadius: '4px', border: '1px solid #ccc' }}
           />
