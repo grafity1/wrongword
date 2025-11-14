@@ -6,10 +6,13 @@ function WrongWordTable({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // 한 페이지당 10개
 
+  // data가 배열인지 확인, 아니라면 빈 배열로
+  const safeData = Array.isArray(data) ? data : [];
+
   // 검색어 기준 필터링
-  const filteredData = data.filter(d =>
-    d.wrongname.toLowerCase().includes(search.toLowerCase()) ||
-    d.rightname.toLowerCase().includes(search.toLowerCase())
+  const filteredData = safeData.filter(d =>
+    (d.wrongname || '').toLowerCase().includes(search.toLowerCase()) ||
+    (d.rightname || '').toLowerCase().includes(search.toLowerCase())
   );
 
   // 페이지 계산
