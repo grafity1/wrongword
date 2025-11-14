@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function AddWordForm({ onAdd }) {
-  const [wrongword, setWrongword] = useState('');
-  const [rightword, setRightword] = useState('');
+  const [wrongname, setWrongname] = useState('');
+  const [rightname, setRightname] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!wrongword || !rightword) return;
+    if (!wrongname || !rightname) return;
 
     try {
       const res = await axios.post('https://wrongword.onrender.com/api/wrongwords', {
-        wrongword,
-        rightword
+        wrongname,
+        rightname
       });
 
       setMessage(`단어 추가 완료! ID: ${res.data.wordid}`);
-      setWrongword('');
-      setRightword('');
+      setWrongname('');
+      setRightname('');
       if (onAdd) onAdd(res.data); // 부모 컴포넌트에게 새 데이터 전달
     } catch (err) {
       console.error(err);
@@ -34,7 +34,7 @@ function AddWordForm({ onAdd }) {
           <label>잘못된 단어:</label>
           <input
             type="text"
-            value={wrongword}
+            value={wrongname}
             onChange={(e) => setWrongword(e.target.value)}
             required
             style={{ width: '100%', padding: '8px', margin: '5px 0', borderRadius: '4px', border: '1px solid #ccc' }}
@@ -44,7 +44,7 @@ function AddWordForm({ onAdd }) {
           <label>올바른 단어:</label>
           <input
             type="text"
-            value={rightword}
+            value={rightname}
             onChange={(e) => setRightword(e.target.value)}
             required
             style={{ width: '100%', padding: '8px', margin: '5px 0', borderRadius: '4px', border: '1px solid #ccc' }}
